@@ -47,4 +47,14 @@ describe('Funcionalidade login', () => {
         cy.get('[data-testid="entrar"]').click()
         cy.get('.alert').should('contain', 'Email e/ou senha inválidos')
     });
+
+    it('Validar link Cadastre-se na tela login', () => {
+        
+        cy.get('[data-testid="cadastrar"]').click()
+        cy.get('.font-robot').should('contain', 'Cadastro')
+    });
+
+    it('Validar link "Recuperar senha" na tela login', () => {
+        //Não tem esse link na tela de login
+    });
 });
