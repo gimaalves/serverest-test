@@ -15,5 +15,6 @@ describe('Funcionalidade: Lista de compras', () => {
     it('Validar acesso a lista de compras', () => {
         cy.visit('minhaListaDeProdutos')
         cy.get('h1', {timeout: 10000}).should('contain', 'Lista de Compras')
+        cy.url().should('contain', 'minhaListaDeProdutos')
     });
 });
