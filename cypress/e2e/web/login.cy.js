@@ -54,7 +54,7 @@ describe('Funcionalidade login', () => {
         cy.get('.font-robot').should('contain', 'Cadastro')
     });
 
-    it('Validar link "Recuperar senha" na tela login', () => {
+/*     it('Validar link "Recuperar senha" na tela login', () => {
         //Não tem esse link na tela de login
-    });
+    }); */
 });
