@@ -30,6 +30,14 @@ describe('Funcionalidade login', () => {
         cy.get('.lead').should('contain', 'Este é seu sistema para administrar seu ecommerce')
     });
 
+    it('Deve realizar login com sucesso usando método customizado', () => {
+        
+        cy.login("teste11@teste.com", "teste")
+
+        cy.get('h1').should('contain', 'Bem Vindo')
+        cy.get('.lead').should('contain', 'Este é seu sistema para administrar seu ecommerce')
+    });
+
     //it.only para executar apenas o cenário em construção
     it('Deve validar usuário inválido', () => {
         
@@ -57,4 +65,15 @@ describe('Funcionalidade login', () => {
 /*     it('Validar link "Recuperar senha" na tela login', () => {
         //Não tem esse link na tela de login
     }); */
+
+    it.only('Deve realizar login com sucesso usando fixture', () => {
+        
+        cy.fixture('login').then((dadoslogin) => {
+            cy.login(dadoslogin.email, dadoslogin.senha)
+        })
+        
+
+        cy.get('h1').should('contain', 'Bem Vindo')
+        cy.get('.lead').should('contain', 'Este é seu sistema para administrar seu ecommerce')
+    });
 });

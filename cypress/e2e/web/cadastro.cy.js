@@ -1,8 +1,9 @@
 /// <reference types="cypress" />
 import { faker } from '@faker-js/faker';
+import dadosUsuario from '../../fixtures/usuarios.json'
 
 describe('Funcionalidade: Cadastro', () => {
-   
+
     beforeEach(() => {
         cy.visit('cadastrarusuarios')
     });
@@ -35,16 +36,16 @@ describe('Funcionalidade: Cadastro', () => {
         cy.cadastroUsuarioAdmin(faker.person.fullName(), faker.internet.email(), 'teste')
 
         cy.get('.alert-link').should('contain', 'Cadastro realizado com sucesso')
-        cy.get('.lead', {timeout: 10000}).should('contain', 'Este é seu sistema para administrar seu ecommerce')
+        cy.get('.lead', { timeout: 10000 }).should('contain', 'Este é seu sistema para administrar seu ecommerce')
     });
 
     //usando metodo customizado
-    it.only('Deve realizar cadastro de usuário não admin com sucesso', () => {
+    it('Deve realizar cadastro de usuário não admin com sucesso', () => {
 
         cy.cadastroUsuarioNaoAdmin(faker.person.fullName(), faker.internet.email(), 'teste')
-    
+
         cy.get('.alert-link').should('contain', 'Cadastro realizado com sucesso')
-        cy.get('h1', {timeout: 10000}).should('contain', 'Serverest Store')
+        cy.get('h1', { timeout: 10000 }).should('contain', 'Serverest Store')
     });
 
     it('Validar obrigatoriedade de campo nome', () => {
@@ -74,14 +75,14 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('.alert').should('contain', 'Password é obrigatório')
     });
 
-/*     it.only('Validar se email é válido', () => {
-        cy.get('[data-testid="nome"]').clear().type('nometeste')
-        cy.get('[data-testid="email"]').clear().type('teste4!teste.com')
-        cy.get('[data-testid="password"]').clear().type('teste1')
-        cy.get('[data-testid="checkbox"]').check()
-        cy.get('[data-testid="cadastrar"]').click()
-        cy.get('.alert').should('contain', 'Password é obrigatório')
-    }); */
+    /*     it.only('Validar se email é válido', () => {
+            cy.get('[data-testid="nome"]').clear().type('nometeste')
+            cy.get('[data-testid="email"]').clear().type('teste4!teste.com')
+            cy.get('[data-testid="password"]').clear().type('teste1')
+            cy.get('[data-testid="checkbox"]').check()
+            cy.get('[data-testid="cadastrar"]').click()
+            cy.get('.alert').should('contain', 'Password é obrigatório')
+        }); */
 
     it('Validar cadastro com email já cadastrado', () => {
         cy.get('[data-testid="nome"]').clear().type('nometeste')
@@ -94,7 +95,15 @@ describe('Funcionalidade: Cadastro', () => {
 
     it('Validar link Entrar para acessar tela de login', () => {
         cy.get('[data-testid="entrar"]').click()
-       cy.get('.font-robot').should('contain', 'Login')
+        cy.get('.font-robot').should('contain', 'Login')
+    });
+
+    it.only('Deve realizar cadastro com sucesso usando importação de dados', () => {
+
+        cy.cadastroUsuarioAdmin(dadosUsuario[0].nome, dadosUsuario[0].email, dadosUsuario[0].senha)
+
+        cy.get('.alert-link').should('contain', 'Cadastro realizado com sucesso')
+        cy.get('.lead', { timeout: 10000 }).should('contain', 'Este é seu sistema para administrar seu ecommerce')
     });
 
 });
