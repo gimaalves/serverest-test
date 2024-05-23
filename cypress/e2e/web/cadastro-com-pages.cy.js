@@ -9,6 +9,9 @@ describe('Funcionalidade: Cadastro - Usando Page Objects', () => {
 
     it('Deve fazer cadastro de usuário admin com sucesso', () => {
         var email = `teste${Date.now()}@teste.com`
+        //const
+        //let
+
         CadastroPage.CadastroUsuarioAdmin('Nome Teste', email, 'teste')
         cy.get('.alert-link').should('contain', 'Cadastro realizado com sucesso')
         cy.get('.lead', { timeout: 10000 }).should('contain', 'Este é seu sistema para administrar seu ecommerce')

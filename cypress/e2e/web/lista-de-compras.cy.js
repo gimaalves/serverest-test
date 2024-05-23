@@ -8,8 +8,14 @@ describe('Funcionalidade: Lista de compras', () => {
         cy.get('[data-testid="senha"]').clear().type('teste')
         cy.get('[data-testid="entrar"]').click()
         cy.wait(1000) */
+        
         //uso de método customizado em support\commands.js
-        cy.login('Kirstin_Lehner34@yahoo.com', 'teste')
+        //cy.login('Kirstin_Lehner34@yahoo.com', 'teste')
+
+        
+        cy.fixture('login').then((dadoslogin) => {
+            cy.login(dadoslogin.email, dadoslogin.senha)
+        })
     });
 
     it('Validar acesso a lista de compras', () => {
