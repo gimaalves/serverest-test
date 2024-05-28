@@ -24,3 +24,4 @@ jobs:
         cache: 'npm'
     - run: npm install -f
     - run: npm test
+    - run: npm run report
