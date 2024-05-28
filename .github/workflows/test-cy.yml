@@ -22,6 +22,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install -f
-    - run: npm test
-    - run: npm run report
+
+    - name: Subir servidor do Serverest
+      run: nohup npm run start &
+    
+    - name: Instalar dependencias do node
+      run: npm install -f
+
+    - name: Executar os testes
+      run: npm run report
+

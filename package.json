@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx cypress run --browser chrome",
     "report": "npx cypress run --record --key 9125553f-55e8-4637-9b07-d53b79d5823b",
+    "start": "npx serverest -y",
     "allure:report": "npx allure serve allure-results"
   },
   "keywords": [],
