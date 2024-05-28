@@ -99,8 +99,10 @@ describe('Funcionalidade: Cadastro', () => {
     });
 
     it.only('Deve realizar cadastro com sucesso usando importação de dados', () => {
+        var email = `teste${Date.now()}@teste.com`
 
-        cy.cadastroUsuarioAdmin(dadosUsuario[0].nome, dadosUsuario[0].email, dadosUsuario[0].senha)
+       // cy.cadastroUsuarioAdmin(dadosUsuario[0].nome, dadosUsuario[0].email, dadosUsuario[0].senha)
+       cy.cadastroUsuarioAdmin(dadosUsuario[0].nome, email, dadosUsuario[0].senha)
 
         cy.get('.alert-link').should('contain', 'Cadastro realizado com sucesso')
         cy.get('.lead', { timeout: 10000 }).should('contain', 'Este é seu sistema para administrar seu ecommerce')
