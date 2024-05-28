@@ -132,3 +132,4 @@ dist
 screenshots/
 videos/
 node_modules/
+allure-results/
