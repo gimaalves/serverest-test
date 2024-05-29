@@ -2,78 +2,79 @@
 
 describe('Funcionalidade login', () => {
     
-    before(() => {
-        //faz algo antes de todos os cenários
-    });
-
     beforeEach(() => {
-        //faz algo antes de cada cenário
+        //executa antes de cada cenário
         cy.visit('login')
     });
 
     afterEach(() => {
-        //faz algo depois de cada cenário
+        //executa depois de cada cenário
         cy.screenshot()
-    });
-
-    after(() => {
-        //faz algo depois de todos os cenários
     });
 
     it('Deve realizar login com sucesso', () => {
         
-        //clear() para limpar o campo antes de digitar novo conteúdo
-        cy.get('[data-testid="email"]').clear().type('Matt94@hotmail.com')
+        //realiza login
+        cy.get('[data-testid="email"]').clear().type('teste1717011470864@teste.com')
         cy.get('[data-testid="senha"]').clear().type('teste')
         cy.get('[data-testid="entrar"]').click()
-        cy.get('h1').should('contain', 'Bem Vindo')
-        cy.get('.lead').should('contain', 'Este é seu sistema para administrar seu ecommerce')
+        
+        //valida apresentação de tela inicial após login
+        cy.get('h1', {timeout: 10000}).should('contain', 'Bem Vindo')
+        cy.get('.lead', {timeout: 10000}).should('contain', 'Este é seu sistema para administrar seu ecommerce')
     });
 
     it('Deve realizar login com sucesso usando método customizado', () => {
-        
-        cy.login("teste11@teste.com", "teste")
 
-        cy.get('h1').should('contain', 'Bem Vindo')
-        cy.get('.lead').should('contain', 'Este é seu sistema para administrar seu ecommerce')
+        //login customizado
+        cy.login("teste1717011470864@teste.com", "teste")
+
+        //valida apresentação de tela inicial após login
+        cy.get('h1', {timeout: 10000}).should('contain', 'Bem Vindo')
+        cy.get('.lead', {timeout: 10000}).should('contain', 'Este é seu sistema para administrar seu ecommerce')
     });
 
-    //it.only para executar apenas o cenário em construção
     it('Deve validar usuário inválido', () => {
         
-        cy.get('[data-testid="email"]').clear().type('teste@hotmail.com')
+        //tenta fazer login
+        cy.get('[data-testid="email"]').clear().type('testerdsdf3434@hotmail.com')
         cy.get('[data-testid="senha"]').clear().type('teste')
         cy.get('[data-testid="entrar"]').click()
-        cy.get('.alert').should('contain', 'Email e/ou senha inválidos')
+
+        //valida alerta de email ou usuario invalido
+        cy.get('.alert', {timeout: 10000}).should('contain', 'Email e/ou senha inválidos')
 
     });
 
     it('Deve validar mensagem de senha inválida', () => {
         
+        //tenta fazer login
         cy.get('[data-testid="email"]').clear().type('Matt94@hotmail.com')
         cy.get('[data-testid="senha"]').clear().type('teste123')
         cy.get('[data-testid="entrar"]').click()
-        cy.get('.alert').should('contain', 'Email e/ou senha inválidos')
+
+        //valida alerta de email ou usuario invalido
+        cy.get('.alert', {timeout: 10000}).should('contain', 'Email e/ou senha inválidos')
     });
 
     it('Validar link Cadastre-se na tela login', () => {
         
+        //acessar o link Cadastre-se
         cy.get('[data-testid="cadastrar"]').click()
-        cy.get('.font-robot').should('contain', 'Cadastro')
+
+        //valida se tela de cadastro apresentada
+        cy.get('.font-robot', {timeout: 10000}).should('contain', 'Cadastro')
     });
 
-/*     it('Validar link "Recuperar senha" na tela login', () => {
-        //Não tem esse link na tela de login
-    }); */
-
-    it.only('Deve realizar login com sucesso usando fixture', () => {
+    it('Deve realizar login com sucesso usando fixture', () => {
         
+        //realiza login
         cy.fixture('login').then((dadoslogin) => {
             cy.login(dadoslogin.email, dadoslogin.senha)
         })
-        
 
-        cy.get('h1').should('contain', 'Bem Vindo')
-        cy.get('.lead').should('contain', 'Este é seu sistema para administrar seu ecommerce')
+        //valida apresentação de tela inicial após login
+        cy.get('h1', {timeout: 10000}).should('contain', 'Bem Vindo')
+        cy.get('.lead', {timeout: 10000}).should('contain', 'Este é seu sistema para administrar seu ecommerce')
     });
 });

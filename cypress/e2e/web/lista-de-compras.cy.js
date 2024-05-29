@@ -2,24 +2,22 @@
 
 describe('Funcionalidade: Lista de compras', () => {
     
-    beforeEach(() => {
-/*         cy.visit('login')
-        cy.get('[data-testid="email"]').clear().type('Kirstin_Lehner34@yahoo.com')
-        cy.get('[data-testid="senha"]').clear().type('teste')
-        cy.get('[data-testid="entrar"]').click()
-        cy.wait(1000) */
-        
-        //uso de método customizado em support\commands.js
-        //cy.login('Kirstin_Lehner34@yahoo.com', 'teste')
+    //faz login antes de cada teste
+    beforeEach(() => {  
+        var email = `teste${Date.now()}@teste.com`
 
-        
-        cy.fixture('login').then((dadoslogin) => {
-            cy.login(dadoslogin.email, dadoslogin.senha)
-        })
+        //cadastra novo usuário e faz login
+        cy.cadastroUsuarioAdmin("Nome Teste", email, "teste")
+        cy.get('h1', {timeout: 10000}).should('contain', 'Bem Vindo')
+        cy.get('.lead', {timeout: 10000}).should('contain', 'Este é seu sistema para administrar seu ecommerce')
     });
 
     it('Validar acesso a lista de compras', () => {
+
+        //acessa a lista de compras
         cy.visit('minhaListaDeProdutos')
+
+        //valida se lista de compras apresentada
         cy.get('h1', {timeout: 10000}).should('contain', 'Lista de Compras')
         cy.url().should('contain', 'minhaListaDeProdutos')
     });

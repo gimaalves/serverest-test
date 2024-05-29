@@ -29,7 +29,6 @@ Cypress.Commands.add('login', (email, password) => {
    cy.get('[data-testid="email"]').clear().type(email)
    cy.get('[data-testid="senha"]').clear().type(password)
    cy.get('[data-testid="entrar"]').click()
-   cy.wait(2000)
 })
 
 Cypress.Commands.add('cadastroUsuarioAdmin', (nome, email, password) => {
